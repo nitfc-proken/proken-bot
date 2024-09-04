@@ -1,0 +1,8 @@
+DISCORD:
+ TOKEN: <YOUR_BOT_TOKEN> # as string
+ SERVER: <YOUR_SERVER_ID> # as string
+
+#Join-Role
+JOIN_ROLE:
+ ROLE: <ROLE_ID_TO_ASSIGN> # as string
+ INVITE: <YOUR_INVITE_CODE> # as string

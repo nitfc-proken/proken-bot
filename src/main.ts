@@ -1,27 +1,30 @@
 import {
   Client,
+  Events,
   GatewayIntentBits,
-  Guild,
-  Invite,
-  GuildMember,
 } from 'discord.js';
-import { config } from 'dotenv';
-config({ path: 'data/.env' });
+import { YamlConfiguation } from './util/yaml';
+import { JoinRole } from './join-role/JoinRole'; // Import the JoinRole class from the appropriate module
 
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildInvites,
-  ],
-});
+const bot_token = YamlConfiguation.get('DISCORD.TOKEN');
 
-const { DISCORD_TOKEN, GUILD_ID, ROLE_ID, INVITE_CODE } = process.env;
-
-if (!DISCORD_TOKEN || !GUILD_ID || !ROLE_ID || !INVITE_CODE) {
-  console.error('環境変数が設定されていません。');
+if (!bot_token) {
+  console.error('Discordのトークンが見つかりません。');
   process.exit(1);
 }
 
-// ボットにログイン
-client.login(DISCORD_TOKEN);
+export const DiscordClient = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+  ],
+});
+
+
+DiscordClient.login(bot_token);
+
+DiscordClient.once(Events.ClientReady, () => {
+  console.log(`Logged in as ${DiscordClient.user?.tag}!`);
+  new JoinRole(DiscordClient);
+})
+
