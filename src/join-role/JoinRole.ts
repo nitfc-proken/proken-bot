@@ -59,7 +59,7 @@ export class JoinRole{
           const role = await member.guild.roles.fetch(this.ROLE_ID!);
           if (role) {
             await member.roles.add(role);
-            message = `Assigned role <@&${this.ROLE_ID}> to user <@${member.user.id}`;
+            message = `Assigned role <@&${this.ROLE_ID}> to user <@${member.user.id}>`;
           } else {
             message = `指定されたロールが見つかりません。 RoleID=${this.ROLE_ID}`;
           }
