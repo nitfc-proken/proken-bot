@@ -2,10 +2,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
 
-export class YamlConfiguation{ 
+export class YamlConfiguation {
   private static filePath = path.resolve('data/.yaml');
-  private static fileContents = fs.readFileSync(YamlConfiguation.filePath, 'utf8');
-  private static data:any = yaml.load(YamlConfiguation.fileContents);
+  private static fileContents = fs.readFileSync(
+    YamlConfiguation.filePath,
+    'utf8'
+  );
+  private static data: any = yaml.load(YamlConfiguation.fileContents);
 
   static get(key: string): any {
     const keys = key.split('.');
@@ -20,7 +23,4 @@ export class YamlConfiguation{
     }
     return value;
   }
-
 }
-
-

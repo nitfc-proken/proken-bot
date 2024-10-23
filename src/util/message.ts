@@ -1,11 +1,13 @@
 import { TextChannel } from 'discord.js';
-import {DiscordClient} from '../main';
+import { DiscordClient } from '../main';
 async function sendMessage(channelId: string, message: string): Promise<void> {
   try {
     const channel = await DiscordClient.channels.fetch(channelId);
 
     if (!channel || !channel.isTextBased()) {
-      console.error(`チャンネルが見つからないか、テキストチャンネルではありません: ${channelId}`);
+      console.error(
+        `チャンネルが見つからないか、テキストチャンネルではありません: ${channelId}`
+      );
       return;
     }
 
